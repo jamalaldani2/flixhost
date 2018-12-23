@@ -256,37 +256,27 @@ if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return mess
 });
 
 client.on('message', message => {
-              if (!message.channel.guild) return;
-      if(message.content =='$member')
-      var IzRo = new Discord.RichEmbed()
-      .setThumbnail(message.author.iconURL)
-      .setFooter(message.author.username, message.author.avatarURL)
-      .setTitle(' عدد اعضاء السيرفر  ')
-      .addBlankField(true)
-      .addField('.',`${message.guild.memberCount}`)
-      message.channel.send(IzRo);
-    });
-
-
-  if(msg.content.startsWith ('$server')) {
-    let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setThumbnail(msg.guild.iconURL)
-    .setTitle(`${msg.guild.name}`)
-    .addField('**__ Server Name | اسم السيرفر__**',`[** __${msg.guild.name}__ **]`,true)
-    .addField('**__ OwnerShip | الاونر الاساسي__**',`**${msg.guild.owner}**`,true)
-    .addField('**__ Server ID | ايدي السيرفر__**',`**${msg.guild.id}**`,true)
-    .addField('**__ Members Count | عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
-    .addField('**__ Online | الاعضاء الاونلاين__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-    .addField('**__ Verification Level | مستوي الحمايه__**',`[** __${verifLevels[msg.guild.verificationLevel]}__** ]`,true)
-    .addField('**__ Region | البلد__**',`[** __${region[msg.guild.region]}__** ]`,true)
-    .addField('**__ Text Channels | رومات كتابيه__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-    .addField('**__ Voice Channels | رومات صوتيه__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-    .addField('**__ Created At | صنع في __**',msg.guild.createdAt.toLocaleString())
-    msg.channel.send({embed:embed});
-  }
+var prefix = "$" // البريفكس
+if(message.content.startsWith(prefix +"server")){ // الامر
+  if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return message.reply(`**هذه الخاصية للادارة فقط** :negative_squared_cross_mark: `)
+if(!message.channel.guild) return message.reply(' ');
+const millis = new Date().getTime() - message.guild.createdAt.getTime();
+const now = new Date();
+const verificationLevels = ['None', 'Low', 'Medium', 'Insane', 'Extreme'];
+const days = millis / 1000 / 60 / 60 / 24;
+var embed  = new Discord.RichEmbed()
+.setAuthor(message.guild.name, message.guild.iconURL)
+.addField("**🆔 Server ID:**", message.guild.id,true)
+.addField("**📅 Created On**", message.guild.createdAt.toLocaleString(),true)
+.addField("**👑 Owned by**",`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
+.addField("**👥 Members**",`[${message.guild.memberCount}]`,true)
+.addField('**💬 Channels **',`**${message.guild.channels.filter(m => m.type === 'text').size}**` + ' text | Voice  '+ `**${message.guild.channels.filter(m => m.type === 'voice').size}** `,true)
+.addField("**🌍 Others **" , message.guild.region,true)
+.setColor('#000000')
+message.channel.sendEmbed(embed)
+ 
+}
 });
-
 
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
