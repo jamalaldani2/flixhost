@@ -267,27 +267,7 @@ client.on('message', message => {
       message.channel.send(IzRo);
     });
 
-    var prefix = "$";
- 
-client.on('message', function(msg) {
-  let verifLevels = ["None", "Low", "Medium", "(╯°□°）╯︵  ┻━┻", "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"];
-  let region = {
-      "brazil": "Brazil",
-      "eu-central": "Central Europe",
-      "singapore": "Singapore",
-      "Russia": "Russia",
-      "us-central": "U.S. Central",
-      "sydney": "Sydney",
-      "us-east": "U.S. East",
-      "us-south": "U.S. South",
-      "us-west": "U.S. West",
-      "eu-west": "Western Europe",
-      "vip-us-east": "VIP U.S. East",
-      "london": "London",
-      "amsterdam": "Amsterdam",
-      "hongkong": "Hong Kong"
-  };
- 
+
   if(msg.content.startsWith ('$server')) {
     let embed = new Discord.RichEmbed()
     .setColor('RANDOM')
