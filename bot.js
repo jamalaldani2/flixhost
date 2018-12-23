@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const prefix = "$";
 
 client.on('message', message => {
-    if (message.content === ('$Obot')) {
+    if (message.content === ('$bot')) {
     message.channel.send({
         embed: new Discord.RichEmbed()
             .setAuthor(client.user.username,client.user.avatarURL)
@@ -46,7 +46,7 @@ client.on('message', msg => {
 
 client.on('message', message => {
 
-    if (message.content === "$Omc") {
+    if (message.content === "$mc") {
                         if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
 
 if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' ليس لديك صلاحيات');
@@ -57,7 +57,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' لي
                message.reply("تم تقفيل الشات ? ")
            });
              }
-if (message.content === "$Oumc") {
+if (message.content === "$umc") {
     if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
 
 if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ليس لديك صلاحيات');
@@ -74,7 +74,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
 });
 
 client.on('message', message => {
-const prefix = "$O";
+const prefix = "$";
   if (message.author.kick) return;
   if (!message.content.startsWith(prefix)) return;
 
