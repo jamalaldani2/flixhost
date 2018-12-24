@@ -98,7 +98,7 @@ let banembed = new Discord.RichEmbed()
 .addField("Time", msg.createdAt)
 .addField("Reason", breason)
 
-let banChannel = msg.guild.channels.find("name","bot");
+let banChannel = msg.guild.channels.find("name","ban-list");
 if(!banChannel) return msg.channel.send("Can't find `اسم الروم` channel.");
 
 msg.guild.member(bUser).ban(breason);
