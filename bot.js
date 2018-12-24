@@ -98,7 +98,7 @@ let banembed = new Discord.RichEmbed()
 .addField("Time", msg.createdAt)
 .addField("Reason", breason)
 
-let banChannel = msg.guild.channels.find("name","ban-list");
+let banChannel = msg.guild.channels.find("name","『ban-list』");
 if(!banChannel) return msg.channel.send("Can't find `اسم الروم` channel.");
 
 msg.guild.member(bUser).ban(breason);
@@ -399,7 +399,7 @@ let kickembed = new Discord.RichEmbed()
 .addField("Time", msg.createdAt)
 .addField("Reason", kreason)
 
-let kickChannel = msg.guild.channels.find(`name`,"ban-list");
+let kickChannel = msg.guild.channels.find(`name`,"『ban-list』");
 if(!kickChannel) return msg.channel.send("Can't find `اسم الروم` channel.");
 
 msg.guild.member(kUser).kick(kreason);
@@ -409,7 +409,30 @@ kickChannel.send(kickembed)
 }
 
 });
+const invites = {};
 
+const wait = require('util').promisify(setTimeout);
+
+client.on('ready', () => {
+  wait(1000);
+
+  client.guilds.forEach(g => {
+    g.fetchInvites().then(guildInvites => {
+      invites[g.id] = guildInvites;
+    });
+  });
+});
+
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    invites[member.guild.id] = guildInvites;
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const logChannel = member.guild.channels.find(channel => channel.name === "spam-4");
+    logChannel.send(`${member} Invited by: <@${inviter.id}>`);
+  });
+});
 
 
 
