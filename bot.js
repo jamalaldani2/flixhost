@@ -399,7 +399,7 @@ let kickembed = new Discord.RichEmbed()
 .addField("Time", msg.createdAt)
 .addField("Reason", kreason)
 
-let kickChannel = msg.guild.channels.find(`name`,"اسم الروم");
+let kickChannel = msg.guild.channels.find(`name`,"ban-list");
 if(!kickChannel) return msg.channel.send("Can't find `اسم الروم` channel.");
 
 msg.guild.member(kUser).kick(kreason);
